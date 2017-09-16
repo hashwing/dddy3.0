@@ -1,0 +1,45 @@
+
+#header{
+    padding-top: 3px;
+    height: 50px;
+}
+#navbar{
+   background-color:  #3280fc;
+    border: 0px;
+}
+.content{
+    clear: both;
+    min-height: 600px;
+    text-align: center;
+}
+.base-info{
+    padding-left: 50px;
+}
+.base-content{
+    padding-top: 15px;
+}
+.over-flow{
+    text-overflow: ellipsis;
+    overflow: hidden;
+    height: 15px;
+}
+.title{
+    font-size: 20px;
+    font-weight: 600;
+}
+.all-price{
+    float: right;
+    padding-right: 20px;
+}
+#All-price{
+    color: red;
+    font-weight: 600;
+    font-size: 18px;
+}
+.add-order{
+    margin-left: 25px;
+}
+.footer{
+    text-align: center;
+    margin-bottom: 20px;
+}

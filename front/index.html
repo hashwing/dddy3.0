@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=0">
+    <title>肇庆学院校园云印</title>
+    <link type="text/css" href="statics/css/zui.min.css" rel="stylesheet" />
+    <link type="text/css" href="css/index.css" rel="stylesheet" />
+</head>
+<body>
+<!--nav-->
+<header id="header" class="bg-primary">
+    <div class="navbar  navbar-inverse bg-primary" id="navbar" role="banner">
+        <div class="container" >
+            <div class="navbar-header">
+                <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target=".zui-navbar-collapse">
+                    <span class="sr-only">切换导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/" class="navbar-brand"><li class="icon-cloud icon"></li><span class="path-zui-36"><i class="path-1"></i><i class="path-2"></i></span> <span class="brand-title">肇庆学院校园云印</span> &nbsp;<small class="zui-version"></small></a>
+            </div>
+            <nav class="collapse navbar-collapse zui-navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#" target="_blank"><i class="icon icon-group"></i><span> 我们的团队</span></a></li>
+                    <li><a href="#" target="_blank"><i class="icon icon-phone"></i><span> 联系我们</span></a></li>
+                    <li><a  href="#" target="_blank"><i class="icon icon-plane"></i><span>加盟合作</span></a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</header>
+<div class="container content">
+    <div class="row base-content">
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="title">基本信息</span>
+            </div>
+            <div class="panel-body base-info">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="print-adr" class="col-sm-1">打印地址</label>
+                            <div class="col-sm-2">
+                                <select class="form-control" id="print-adr">
+                                    <option value="0">-请选择打印地点-</option>
+                                    <option value="111">东区15号楼334</option>
+
+                                </select>
+                            </div>
+                            <div class="col-sm-2">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" id="isSend"> 是否配送
+                                    </label>
+                                </div>
+                            </div>
+                            <label for="get-time" class="col-sm-1">取货时间：</label>
+                            <div class="col-sm-2 get-time">
+                                <select class="form-control" id="get-time">
+                                    <option value="0">-请选择自提时间-</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-2 send-time hidden">
+                                <select class="form-control" id="send-time">
+                                    <option value="0">-请选择配送时间-</option>
+                                </select>
+                            </div>
+                            <label for="phone" class="col-sm-1">手机号：</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" id="phone" placeholder="手机号">
+                            </div>
+                        </div>
+                        <div class="form-group send-info hidden">
+                            <label for="send-adr" class="col-sm-4">配送地址</label>
+                            <div class="col-sm-2">
+                                <select class="form-control" id="send-adr">
+                                    <option value="0">-请选择配送宿舍区-</option>
+                                </select>
+                            </div>
+                            <label for="send-ssh" class="col-sm-1">宿舍号：</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" id="send-ssh" placeholder="宿舍号">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="title">文件列表</span>
+            </div>
+            <div class="panel-body">
+                    <table class="table" id="file-list"></table>
+
+                <input id="token" name="token" type="hidden" value="">
+                <div class="form-group file hidden">
+                    <div class="input-group">
+                        <span class="input-group-addon">文件</span>
+                        <input type="file" class="form-control" id="file" placeholder="文件">
+                    </div>
+                </div>
+
+
+                <!-- 上传按钮 -->
+                <button type="button" id="addfile" class="btn btn-lg btn-primary" ><i class="icon icon-cloud-upload "></i>上传文件</button>
+                <p>支持：doc、docx、pdf<span style="color: red">  【为了避免排版一致，请尽量上传<b>pdf</b>】</span></p>
+                <div class="modal fade "  id="myModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">上传文件</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" style="clear: both">
+                                    <div class="form-group">
+                                        <label for="pagetype"  class="col-xs-2">文件</label>
+                                        <div id="upload-state" >
+                                            <div class="col-xs-8">
+                                                <div class="progress progress-striped active">
+                                                    <div class="progress-bar" role="progressbar"  aria-valuemin="0" aria-valuemax="100">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <strong><span class="progress-value">50</span></strong>
+                                            </div>
+                                        </div>
+                                        <div class="col-xs-10 col-md-8 hidden" id="filedesc">
+                                            <input type="hidden" id="filename" >
+                                            <input type="text" class="form-control " id="rfilename" disabled >
+                                        </div>
+                                        <div class="col-xs-10 col-md-8 over-flow hidden" id="filetip">
+
+                                        </div>
+                                    </div>
+                                    <div id="print-setting">
+                                        <div class="form-group">
+                                            <label for="pagetype"  class="col-xs-2">打印类型</label>
+                                            <div class="col-xs-10 col-md-8">
+                                                <select class="form-control" id="pagetype">
+                                                    <option value="1">单面</option>
+                                                    <option value="2">双面</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="isbind"  class="col-xs-2">是否装订</label>
+                                            <div class="col-xs-10 col-md-8">
+                                                <select class="form-control" id="isbind">
+                                                    <option value="1">要装订</option>
+                                                    <option value="0">不装订</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pagesize" class="col-xs-2">大小色彩</label>
+                                            <div class="col-xs-10 col-md-8">
+                                                <select class="form-control" id="pagesize">
+                                                    <option value="1">A4黑白</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="range" class="col-xs-2">打印范围</label>
+
+                                            <div class="col-xs-2">
+                                                <input type="number" class="form-control" id="range" value="1">
+                                            </div>
+                                            <label for="range" class="col-xs-2 col-md-1">页至</label>
+                                            <div class="col-xs-2">
+                                                <input type="number" class="form-control" id="range2" >
+                                            </div>
+                                            <label for="range2" style="text-align: left" class="col-xs-1">页</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="copys" class="col-xs-2">打印份数</label>
+                                            <div class="col-xs-10 col-md-6">
+                                                <input type="number" class="form-control" id="copys" value="1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer " style="clear: both">
+                                <button type="button" class="btn btn-default"id="cancel">重新上传</button>
+                                <button type="button" id="save" class="btn btn-primary">保存</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="panel">
+            <div class="panel-heading">
+                <span class="title">合算清单</span>
+            </div>
+            <div class="panel-body">
+                <table class="table">
+                    <tr>
+                        <td>类型</td>
+                        <td>单价（元/页）</td>
+                        <td>数量（页）</td>
+                        <td>价格(元）</td>
+                    </tr>
+                    <tr>
+                        <td>单面</td>
+                        <td id="single-price">0.15</td>
+                        <td id="single-count">0</td>
+                        <td id="single-prices">0</td>
+                    </tr>
+                    <tr>
+                        <td>双面</td>
+                        <td id="double-price">0.18</td>
+                        <td id="double-count">0</td>
+                        <td id="double-prices">0</td>
+                    </tr>
+
+                </table>
+                <div class="all-price">
+                    合计：
+                   <span id="All-price">00.00</span>元
+                <button class="btn btn-success add-order">提交订单</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 对话框触发按钮 -->
+
+    <!-- 对话框HTML -->
+    <div class="modal fade" id="jiesuan">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">共<span id="wds"></span>份打印文件</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="../pay/alipayapi.php">
+                        <input type="hidden" id="ddh" name="WIDout_trade_no"/>
+                        <input type="hidden" id="spxq" name="WIDsubject"/>
+                        <input type="hidden" id="zongjia" name="WIDtotal_fee"/>
+                        <input type="hidden" value="打印文件" name="WIDbody"/>
+                        <input type="hidden" value="http://dy.ggproject.cn" name="WIDshow_url"/>
+                        <b style="font-size:30px;">合计</b>
+                        <p><b style="font-size:30px; color:red;"><span id="zfprice"></span>元</b></p><br>
+                        <button class="btn btn-primary" type="submit">支付宝支付</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    Copyright © 2016.肇庆学院校园云印团队 所有 power by <a target="_blank" href="http://dddayin.cn">DD打印</a> 备案号：粤ICP备15113762-1
+</div>
+
+
+<script type="text/javascript" src="statics/lib/jquery/jquery.js"></script>
+<script type="text/javascript" src="statics/js/zui.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+</body>
+
+</html>
